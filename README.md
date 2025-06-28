@@ -2,6 +2,12 @@
 
 A classic, no-nonsense driver and toolchain for driving the General Instrument SP0256-AL2 allophone speech chip from a Z80 CPU, built with the Z88DK toolkit.
 
+This has been tested and is working on the following hardware:
+
+[SC126 z180 computer](https://www.tindie.com/products/tindiescx/sc126-z180-sbcmotherboard-kit-for-rcbus/)
+
+[Speech Synthesizer for RC2019-style computers](https://www.tindie.com/products/mrgelee/mg005-speech-synthesiser-designed-for-rc2014/?pt=ac_prod_search)
+
 ---
 
 ## 📜 Overview
@@ -10,7 +16,6 @@ This project delivers a proven, straightforward implementation of SP0256-AL2 spe
 
 - **Allophone table** mapping decimal codes (0–63) to phonemes  
 - A **C header** (`phonemes.h`) for easy phoneme reference in your Z80 code  
-- A **phrase-to-allophone compiler** (C# .NET 8 CLI) to convert text strings into allophone sequences  
 - Example Z80 driver code targeting the SCZ180+SP0256-AL2 platform  
 - Integration with **Z88DK** for cross-compiling your speech programs
 
@@ -22,9 +27,8 @@ By sticking to time-tested patterns and a clear allophone mapping, you get relia
 
 - **Complete allophone mapping**: Decimal values 0–63 → phoneme names (stored in `include/phonemes.h`)
 - **C driver** for SP0256-AL2 control and data latching  
-- **Phrase compiler** to preprocess text into SP0256-AL2-compatible allophone sequences  
 - **Z88DK build scripts** for seamless cross-compilation to Z80 targets  
-- **Minimal dependencies**—just a Z80 system, SP0256-AL2, and Z88DK  
+- **Minimal dependencies**—just a [Z80 system](https://www.tindie.com/products/tindiescx/sc126-z180-sbcmotherboard-kit-for-rcbus/), [SP0256-AL2](https://www.tindie.com/products/mrgelee/mg005-speech-synthesiser-designed-for-rc2014/?pt=ac_prod_search), and [Z88DK](https://github.com/z88dk/z88dk)  
 
 ---
 
@@ -57,7 +61,7 @@ By sticking to time-tested patterns and a clear allophone mapping, you get relia
 
 - **Z88DK** (Z80 C development toolkit)  
   Clone or install from:  
-  https://github.com/z88dk/z88dk
+  [https://github.com/z88dk/z88dk](https://github.com/z88dk/z88dk)
 
 - A **Z80-based target** (e.g., SCZ180, CP/M, custom board) wired to an SP0256-AL2
   
@@ -70,24 +74,31 @@ By sticking to time-tested patterns and a clear allophone mapping, you get relia
    git clone https://github.com/cerkit/sp0256-synth.git
    cd sp0256-synth
    ```
+2. Ensure that the Z88DK binaries are in your PATH: `export PATH=${PATH}:${HOME}/z88dk/bin           
+export ZCCCFG=${HOME}/z88dk/lib/config`
 
-2. **Build your Z80 firmware**  
+3. **Build your PROGRAM.bin file**  
    ```bash
-   make clean
-   make TARGET=scz180
+   zcc +scz180 -o future future_speech.c -create-app
    ```
-3. **Upload** the generated binary (`.bin` or `.com`) to your retro computer using XMODEM.
-
+4. **Upload** the generated binary (`future.bin` to `future.com`) to your retro computer using XMODEM (I am using the [`serial`](https://apps.apple.com/us/app/serial/id877615577?mt=12)) program for MacOS).
+  ``` bash
+    c:
+    b:xm r future.com
+  ```
+- Choose to Send File by XMODEM in terminal program
+- Upload the future.bin file
+    
 ---
 
 ## ⚙️ Usage
 
-- **In Z80 code**, include the header and call:
+- **In Z80 code**, include the headers:
   ```c
-  #include "phonemes.h"
-
-  void sp0256_init(void);
-  void sp0256_say(uint8_t *allophones);
+  #include <z180.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "phonemes.h"  // Include allophone definitions
   ```
 
 ---
@@ -95,7 +106,7 @@ By sticking to time-tested patterns and a clear allophone mapping, you get relia
 ## 📝 References
 
 - **Z88DK** – Z80 C compiler toolkit  
-  https://github.com/z88dk/z88dk
+  [https://github.com/z88dk/z88dk](https://github.com/z88dk/z88dk)
 - **General Instrument SP0256-AL2 Datasheet**
 - **Allophone definitions** from `include/phonemes.h`
 
