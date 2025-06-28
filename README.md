@@ -8,6 +8,10 @@ This has been tested and is working on the following hardware:
 
 [Speech Synthesizer for RC2019-style computers](https://www.tindie.com/products/mrgelee/mg005-speech-synthesiser-designed-for-rc2014/?pt=ac_prod_search)
 
+Here is a short video that covers this process:
+
+[Tomorrow never sleeps on YouTube](https://youtu.be/zUu2rRYJoMU)
+
 ---
 
 ## 📜 Overview
