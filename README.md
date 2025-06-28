@@ -6,7 +6,7 @@ This has been tested and is working on the following hardware:
 
 [SC126 z180 computer](https://www.tindie.com/products/tindiescx/sc126-z180-sbcmotherboard-kit-for-rcbus/)
 
-[Speech Synthesizer for RC2019-style computers](https://www.tindie.com/products/mrgelee/mg005-speech-synthesiser-designed-for-rc2014/?pt=ac_prod_search)
+[Speech Synthesizer for RC2014-style computers](https://www.tindie.com/products/mrgelee/mg005-speech-synthesiser-designed-for-rc2014/?pt=ac_prod_search)
 
 Here is a short video that covers this process:
 
